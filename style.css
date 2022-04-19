@@ -1,0 +1,192 @@
+input:focus {
+    outline: none;
+}
+
+body {
+    background-color: #212121;
+    color: #909090;
+    text-align: center;
+    font-family: sans-serif, monospace, 'Gill Sans', 'Gill Sans MT', 'Trebuchet MS';
+    font-weight: 300;
+}
+
+#settingsOverlay {
+    position: fixed;
+    display: none;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2;
+}
+
+#closeSettings {
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+}
+
+#settingsMenu {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 50px;
+    color: white;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    background-color: #131313;
+    width: 500px;
+    border-radius: 20px;
+    padding-bottom: 50px;
+}
+
+#settingsHeader {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+#settingsMenuIcon {
+    margin-left: 22px;
+}
+
+#settingsMenuHeading {
+    flex-grow: 1;
+    text-align: center;
+    margin-top: 25px;
+    font-size: xx-large;
+}
+
+#centerSettingsMenuHeading {
+    width: 46px;
+}
+
+#settingsSepperate {
+    opacity: 50%;
+}
+
+#settingsOptionsSection {
+    margin-left: 90px; 
+    text-align: left;
+}
+
+.settingsLabel {
+    font-size: x-large;
+}
+
+#chooseSearch {
+    outline: none;
+    font-size: 20px;
+    background-color: rgba(255, 255, 255, 0.5);
+    color: white;
+    border-radius: 5px;
+    background-color: #363636;
+    border: 0;
+    padding: 1px;
+}
+
+#topBar {
+    text-align: right; 
+    margin: 30px;
+}
+
+#settingsButton {
+    text-align: left; 
+    color: rgba(255, 255, 255, 0.5); 
+    text-decoration: none; 
+    background-color: inherit; 
+    border: 0;
+}
+
+#weekDay {
+    text-align: left;
+    font-size: 40px;
+    opacity: 50%;
+    margin: 50px;
+}
+
+#time {
+    margin: auto;
+    width: 100%; 
+    font-size: 119px; 
+    opacity: 50%;
+}
+
+#date {
+    font-size: 25px;
+    margin: auto; 
+    width: 100%; 
+    opacity: 50%; 
+    margin-bottom: 50px;
+}
+
+#searchDiv {
+    margin: auto; width: 60%;
+}
+
+#searchbar {
+    display: flex;
+    height: 50px;
+    border: 0;
+    padding: 2px;
+    padding-left: 20px;
+    border-radius: 25px; 
+    background-color: rgba(255, 255, 266, 0.15);
+}
+
+#searchInput {
+    width: 100%;
+    flex-grow: 2;
+    border: none; 
+    background-color: transparent; 
+    color: white;
+    font-size: 1.1em;
+}
+
+#searchSubmit {
+    border: 0;
+    color: gray; 
+    background-color: transparent;
+    padding-right: 10px;
+}
+
+#logo {
+    width: 30px; 
+    margin-right: 8px;
+}
+
+#linkContainer {
+    margin-top: 50px;
+}
+
+#links {
+    display: inline-block;
+}
+
+.linkbox {
+    display: inline-block;
+    cursor: pointer;
+}
+
+.linkbox:hover {
+    background-color: rgba(0,0,0,0.2);
+    border-radius: 20px;
+}
+
+.link {
+    display: inline-block;
+    padding: 20px 10px 10px 10px;
+    text-decoration: none;
+    color: white;
+}
+
+.linkText {
+    width: 91px;
+    display: inline-block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 13px;
+}
