@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Startseite</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="index.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+</head>
+
+<body onload="bodyLoad()">
+
+<!-----------------------------------------------link-menu-with-form-to-set-name,-url-and-icon-mode-------------------------------------------------------------->
+
+    <!--edit/add link menu hide overlay-->
+    <div id="hideEditDeleteLinkMenu" class="Overlay" onclick="editrmOverlay()"></div>
+
+    <!--link menu overlay-->
+    <div id="linkMenuOverlay" class="Overlay">
+
+        <!--close link menu-->
+        <div id="closeLinkMenu" class="close" onclick="showHideElement('linkMenuOverlay', 'none')"></div>
+        
+        <!--link Menu-->
+        <div id="linkMenu">
+
+            <!--link menu heading-->
+            <p id="linkMenuHeader">edit link</p>
+            <hr>
+
+            <!--link menu form-->
+            <form id="linkForm" class="validation" action="#" autocomplete="off" oninput="enableOkBtn()" onsubmit="submitEditLink()" spellcheck="false">
+
+                <!-- hidden link identifier -->
+                <input id="linkId" type="hidden">
+
+                <!--link name input-->
+                <label for="linkName">name</label><br>
+                <input id="linkName" name="linkName" type="text" spellcheck="false" required><br>
+
+                <!--link url input-->
+                <label for="linkURL">url</label><br>
+                <input id="linkURL" name="linkURL" type="url" required><br>
+
+                <!--link icon mode-->
+                <label for="iconMode">icon</label>
+                <select id="iconMode" name="iconMode">
+                    <option value="clearbit">logo (clearbit)</option>
+                    <option value="favicon">favicon</option>
+                </select>
+
+                <!--Cancel/Ok buttons-->
+                <div id="OkCancelBtns">
+                    <input id="cancel" type="button" value="cancel" onclick="showHideElement('linkMenuOverlay', 'none')">
+                    <input id="ok" type="submit" value="ok">
+                </div>
+            </form>
+        </div>
+    </div>
+
+<!------------------------------------------------------------------settings-menu---------------------------------------------------------------------------->
+
+    <!--settings menu-->
+    <div id="settingsOverlay" class="Overlay">
+        <div id="closeSettings" class="close" onclick="showHideElement('settingsOverlay', 'none')"></div>
+        <div id="settingsMenu">
+
+            <!--heading-->
+            <div id="settingsHeader">
+                <span id="settingsMenuIcon" class="material-icons">settings</span>
+                <span id="settingsMenuHeading">Settings</span>
+                <div id="centerSettingsMenuHeading"></div>
+            </div>
+            <hr id="settingsSepperate">
+
+            <!--options-->
+            <div id="settingsOptionsSection">
+
+                <!--seconds toggle-->
+                <label for="showSeconds">show seconds</label>
+                <input type="checkbox" id="showSeconds" name="showSeconds" onchange="toggleSetting('seconds', 'showSeconds')">
+                <br>
+
+                <!--autocomplete toggle-->
+                <label for="autocomplete">autocomplete</label>
+                <input type="checkbox" id="autocomplete" name="autocomplete" onchange="toggleSetting('autocomplete', 'auto')">
+                <br>
+
+                <!--edit toggle-->
+                <label for="editLinks">edit links</label>
+                <input type="checkbox" id="editLinks" name="editLinks" onchange="toggleSetting('editMode', 'editLinks')">
+                <br>
+
+                <!--show search engine logo-->
+                <label for="showLogo">show search logo</label>
+                <input type="checkbox" id="showLogo" name="showLogo" onchange="toggleSetting('searchLogo', 'showLogo')">
+                <br>
+
+                <!--search engine-->
+                <label for="chooseSearch" class="settingsLabel">search engine</label>
+                <select name="chooseSearch" id="chooseSearch" onchange="changeSearchEngine()">
+                    <option value="ddg">DuckDuckGo</option>
+                    <option value="brave">Brave</option>
+                    <option value="startpage">Startpage</option>
+                    <!-- <option value="searx.org/search">Searx</option> -->
+                    <option value="ya">Yandex</option>
+                    <option value="g">Google</option>
+                    <option value="b">Bing</option>
+                    <option value="w">Wikipedia</option>
+                    <option value="yt">YouTube</option>
+                    <option value="tw">Twitter</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <!---------------------------------------------------------------startpage-main------------------------------------------------------------------------------>
+
+    <!--Startpage-->
+    <div id="startpage">
+
+        <!--top bar-->
+        <div id="topBar">
+            <button class="material-icons" id="settingsButton" onclick="showHideElement('settingsOverlay', 'block')">settings</button>
+        </div>
+
+        <!--time information-->
+        <div id="weekDay">Monday</div>
+        <div id="time">00:00</div>
+        <div id="date">1 Januar, 0001</div>
+
+        <!--searchbar-->
+        <div id="searchDiv">
+            <form id="searchbar" action="duckduckgo.com/" autocomplete="off" onsubmit="urlSubmit()">
+                <img id="logo" src="assets/img/ddg.svg" alt="logo" style="width: 20px;"> <!--20 und 30px-->
+                <input type="search" name="q" id="searchInput" placeholder="Search the web" spellcheck="false">
+                <input id="searchSubmit" class="material-icons" type="submit" value="search">
+            </form>
+        </div>
+
+        <!--Links-->
+        <div id="linkSection">
+
+            <!--custom links-->
+            <div id="linksContainer">
+
+                <!--link 0-->
+                <div id="link_0" class="linkbox">
+
+                    <!--edit btn-->
+                    <span class="material-icons rmbtn" onclick="showHideElement('editLinkMenu_0', 'block'); showHideElement('hideEditDeleteLinkMenu', 'block')">more_vert</span>
+
+                    <!--custom modify link menu-->
+                    <div class="editLinkMenu" id="editLinkMenu_0">
+                        <div class="editLinkBtn" onclick="editLink(0)">edit</div>
+                        <div class="editLinkBtn" onclick="deleteLink(0)">remove</div>
+                    </div>
+
+                    <!--actual link-->
+                    <a href="#" class="link" id="linkURL_0">
+                        <div class="linkBody">
+                            <img class="linkImg" src="" id="linkImg_0"><br>
+                            <p class="linkText" id="linkText_0"></p> 
+                        </div>  
+                    </a>
+                </div>
+
+                <!--link 1-->
+                <div id="link_1" class="linkbox">
+
+                    <!--edit btn-->
+                    <span class="material-icons rmbtn" onclick="showHideElement('editLinkMenu_1', 'block'); showHideElement('hideEditDeleteLinkMenu', 'block')">more_vert</span>
+
+                    <!--custom modify link menu-->
+                    <div class="editLinkMenu" id="editLinkMenu_1">
+                        <div class="editLinkBtn" onclick="editLink(1)">edit</div>
+                        <div class="editLinkBtn" onclick="deleteLink(1)">remove</div>
+                    </div>
+
+                    <!--actual link-->
+                    <a href="#" class="link" id="linkURL_1">
+                        <div class="linkBody">
+                            <img class="linkImg" src="" id="linkImg_1"><br>
+                            <p class="linkText" id="linkText_1"></p> 
+                        </div>  
+                    </a>
+                </div>
+
+                <!--link 2-->
+                <div id="link_2" class="linkbox">
+
+                    <!--edit btn-->
+                    <span class="material-icons rmbtn" onclick="showHideElement('editLinkMenu_2', 'block'); showHideElement('hideEditDeleteLinkMenu', 'block')">more_vert</span>
+
+                    <!--custom modify link menu-->
+                    <div class="editLinkMenu" id="editLinkMenu_2">
+                        <div class="editLinkBtn" onclick="editLink(2)">edit</div>
+                        <div class="editLinkBtn" onclick="deleteLink(2)">remove</div>
+                    </div>
+
+                    <!--actual link-->
+                    <a href="#" class="link" id="linkURL_2">
+                        <div class="linkBody">
+                            <img class="linkImg" src="" id="linkImg_2"><br>
+                            <p class="linkText" id="linkText_2"></p> 
+                        </div>  
+                    </a>
+                </div>
+
+                <!--link 3-->
+                <div id="link_3" class="linkbox">
+
+                    <!--edit btn-->
+                    <span class="material-icons rmbtn" onclick="showHideElement('editLinkMenu_3', 'block'); showHideElement('hideEditDeleteLinkMenu', 'block')">more_vert</span>
+
+                    <!--custom modify link menu-->
+                    <div class="editLinkMenu" id="editLinkMenu_3">
+                        <div class="editLinkBtn" onclick="editLink(3)">edit</div>
+                        <div class="editLinkBtn" onclick="deleteLink(3)">remove</div>
+                    </div>
+
+                    <!--actual link-->
+                    <a href="#" class="link" id="linkURL_3">
+                        <div class="linkBody">
+                            <img class="linkImg" src="" id="linkImg_3"><br>
+                            <p class="linkText" id="linkText_3"></p> 
+                        </div>  
+                    </a>
+                </div>
+
+                <!--link 4-->
+                <div id="link_4" class="linkbox">
+
+                    <!--edit btn-->
+                    <span class="material-icons rmbtn" onclick="showHideElement('editLinkMenu_4', 'block'); showHideElement('hideEditDeleteLinkMenu', 'block')">more_vert</span>
+
+                    <!--custom modify link menu-->
+                    <div class="editLinkMenu"  id="editLinkMenu_4">
+                        <div class="editLinkBtn" onclick="editLink(4)">edit</div>
+                        <div class="editLinkBtn"  onclick="deleteLink(4)">remove</div>
+                    </div>
+
+                    <!--actual link-->
+                    <a href="#" class="link" id="linkURL_4">
+                        <div class="linkBody">
+                            <img class="linkImg" src="" id="linkImg_4"><br>
+                            <p class="linkText" id="linkText_4"></p> 
+                        </div>  
+                    </a>
+                </div>
+
+                <!--link 5-->
+                <div id="link_5" class="linkbox">
+
+                    <!--edit btn-->
+                    <span class="material-icons rmbtn" onclick="showHideElement('editLinkMenu_5', 'block'); showHideElement('hideEditDeleteLinkMenu', 'block')">more_vert</span>
+
+                    <!--custom modify link menu-->
+                    <div class="editLinkMenu" id="editLinkMenu_5">
+                        <div class="editLinkBtn" onclick="editLink(5)">edit</div>
+                        <div class="editLinkBtn" onclick="deleteLink(5)">remove</div>
+                    </div>
+
+                    <!--actual link-->
+                    <a href="#" class="link" id="linkURL_5">
+                        <div class="linkBody">
+                            <img class="linkImg" src="" id="linkImg_5"><br>
+                            <p class="linkText" id="linkText_5"></p> 
+                        </div>  
+                    </a>
+                </div>
+
+            </div>
+
+            <!--add link link-->
+            <div id="add" class="linkboxAdd" onclick="addLink()">
+                <img class="linkImg" style="background-color: transparent;" src="assets/img/add.svg" alt=""><br>
+                <p class="linkText">add link</p> 
+            </div>
+        </div>
+    </div>
+</body>
+</html>
