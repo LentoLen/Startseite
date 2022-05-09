@@ -32,6 +32,8 @@ const urlSubmit = () => {
     event.preventDefault();
     if (document.getElementById("searchInput").value.startsWith("https://")) {
         location.href = document.getElementById("searchInput").value;
+    } else if (document.getElementById("searchInput").value.includes(".") && !document.getElementById("searchInput").value.includes(' ')) {
+        location.href = `https://${document.getElementById("searchInput").value}`
     } else {
         location.href = `https://duckduckgo.com/?q=${document.getElementById("searchInput").value}!${getSetting("searchEngine")}`;
     }
