@@ -9,7 +9,7 @@ const defaultSettings = {
     searchEngine: "ddg",
     links: [],
     linkNames: [],
-    autocomplete: false
+    autocomplete: true,
 };
 
 if (localStorage.getItem("settings") == null) {
@@ -27,7 +27,6 @@ const getSetting = (setting) => {
 }
 
 // url
-
 const urlSubmit = () => {
     event.preventDefault();
     if (document.getElementById("searchInput").value.startsWith("https://")) {
@@ -35,7 +34,7 @@ const urlSubmit = () => {
     } else if (document.getElementById("searchInput").value.includes(".") && !document.getElementById("searchInput").value.includes(' ')) {
         location.href = `https://${document.getElementById("searchInput").value}`
     } else {
-        location.href = `https://duckduckgo.com/?q=${document.getElementById("searchInput").value}!${getSetting("searchEngine")}`;
+        location.href = `https://duckduckgo.com/?q=${document.getElementById("searchInput").value} !${getSetting("searchEngine")}`;
     }
     
 }
@@ -121,7 +120,6 @@ const toggleSetting = (setting, id) => {
 }
 
 const updateSettings = () => {
-    document.getElementById("searchbar").autocomplete = (getSetting("autocomplete") ? "on":"off");
     document.getElementById("logo").style.display = (getSetting("searchLogo") ? "block":"none");
 
     if (getSetting("editMode")) {
@@ -251,6 +249,9 @@ const submitEditLink = () => {
 }
 
 const suggest = () => {
+    if (!getSetting("autocomplete")) {
+        return;
+    }
     suggestInput = document.getElementById("searchInput").value;
     let input = document.getElementById("searchInput").value;
     suggestIndex = -1;
@@ -370,5 +371,12 @@ const searchSuggestion = (id) => {
     urlSubmit()
 } 
 
-
+const maxWidth = () => {
+    console.log("test")
+    if (document.body.offsetWidth < 600) {
+        document.getElementById("linkMenu").style.width = "80%";
+    } else {
+        document.getElementById("linkMenu").style.width = "500px";
+    }
+}
 
