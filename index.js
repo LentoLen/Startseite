@@ -223,6 +223,10 @@ const editLink = (link) => {
 }
 
 const enableOkBtn = () => {
+    if (document.getElementById("linkURL").value.includes(".") && !document.getElementById("linkURL").value.includes("://")) {
+        document.getElementById("linkURL").value = `https://${document.getElementById("linkURL").value}`
+    }
+
     if (document.querySelector(".validation:invalid") == null) {
         document.getElementById("ok").disabled = false;
     } else {
@@ -261,8 +265,7 @@ const suggest = () => {
         document.getElementById("searchbar").style.borderRadius = "25px";
         suggestIndex = -1;
     } else {
-        document.getElementById("searchSuggest").style.display = "block";
-        document.getElementById("searchbar").style.borderRadius = "25px 25px 0 0";
+        
         let script = document.createElement('script');
         script.type = 'text/javascript';
 
@@ -272,20 +275,21 @@ const suggest = () => {
 }
 
 const getSuggestions = (data) => {
+    if (data[1].length > 0) {
+        document.getElementById("searchSuggest").style.display = "block";
+        document.getElementById("searchbar").style.borderRadius = "25px 25px 0 0";
+    } else {
+        document.getElementById("searchSuggest").style.display = "none";
+        document.getElementById("searchbar").style.borderRadius = "25px";
+    }
     document.getElementById("searchSuggest").innerHTML = "<hr>";
     data[1].forEach((element, index) => {
         if (element.startsWith("https://")) {
-            console.log(element)
             document.getElementById("searchSuggest").innerHTML += `<p id='sug${index}' onclick="location.href='${element}'">${element}</p>`;
         } else {
             document.getElementById("searchSuggest").innerHTML += `<p id='sug${index}' onclick="searchSuggestion(${index})">${element}</p>`;
         }
     })
-    if (data[1].length == 0) {
-        document.getElementById("searchSuggest").style.display = "none";
-        document.getElementById("searchbar").style.borderRadius = "25px";
-        suggestIndex = -1;
-    }
 } 
 
 
@@ -372,7 +376,6 @@ const searchSuggestion = (id) => {
 } 
 
 const maxWidth = () => {
-    console.log("test")
     if (document.body.offsetWidth < 600) {
         document.getElementById("linkMenu").style.width = "80%";
     } else {
