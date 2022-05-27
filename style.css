@@ -391,6 +391,7 @@ input:focus {
     text-overflow: ellipsis;
     font-size: 13px;
     color: white;
+    white-space: nowrap;
 }
 
 .linkImg {
